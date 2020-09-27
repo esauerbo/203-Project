@@ -12,4 +12,15 @@ final class Background
       this.id = id;
       this.images = images;
    }
+
+  /* public static Background getBackgroundCell(WorldModel world, Point pos)
+   {
+      return world.background[pos.y][pos.x];
+   }
+
+   public static void setBackgroundCell(WorldModel world, Point pos,
+                                        Background background)
+   {
+      world.background[pos.y][pos.x] = background;
+   }*/
 }

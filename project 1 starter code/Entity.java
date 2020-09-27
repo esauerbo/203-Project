@@ -49,4 +49,9 @@ final class Entity
                             this.kind));
       }
    }
+
+   public void nextImage()
+   {
+      this.imageIndex = (this.imageIndex + 1) % this.images.size();
+   }
 }

@@ -1,2 +1,40 @@
 --Entity--
 getAnimationPeriod() : this was moved to Entity because the only parameter in the function is an Entity object
+nextImage() : this was moved to Entity because the only parameter in the function is an Entity object
+
+
+--WorldModel--
+getBackgroundCell(), setBackgroundCell(), setBackground(), withinBounds(), getBackgroundImage() : these functions were all
+moved to WorldModel because WorldModel is the class in charge of keeping track of background elements. These functions only
+relied on the WorldModel and Background classes.
+
+
+--Action--
+--WorldView--
+drawViewPort() : moved to WorldView becuase only class variable it depends on is WorldView
+drawEntities() : moved to WorldView becuase this function only relies on attributes in the WorldView class
+drawBackground() : moved to WorldView because it relies on WorldView, Viewport, and WorldModel. WorldView contains
+                   these attribute and additionally is meant to control drawing.
+shiftView() : this was moved to WorldView because it relies on WorldView, Viewport, and WorldModel. It would make sense to
+              put this function in Viewport because Viewport controls what part of the world we see, however WorldModel cannot
+              be accessed through Viewport.
+
+
+
+
+--Viewport--
+viewportToWorld() : this was moved to Viewport because the only class variable it depended on was Viewport
+worldToViewport() : this was moved to Viewport because the only class variable it depended on was Viewport
+clamp() : this was moved to Viewport because it is called on the Viewport object
+shift() : this was moved to Viewport because it is called on the Viewport object
+contains() : this was moved to Viewport because it is called on a Viewport object. It also uses a point object, but the point
+             isn't included in any other classes, so it will remain as a parameter.
+
+--VirtualWorld--
+
+
+
+--Functions--
+executeAction(), executeAnimationAction(), executeActivityAction(),
+
+

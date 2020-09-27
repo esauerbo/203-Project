@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 import java.util.Scanner;
 import processing.core.*;
 
@@ -84,7 +85,7 @@ public final class VirtualWorld
          next_time = time + TIMER_ACTION_PERIOD;
       }
 
-      Functions.drawViewport(view);
+      this.view.drawViewport();
    }
 
    public void keyPressed()
@@ -109,7 +110,7 @@ public final class VirtualWorld
                dx = 1;
                break;
          }
-         Functions.shiftView(view, dx, dy);
+         view.shiftView(dx, dy);
       }
    }
 
@@ -188,6 +189,7 @@ public final class VirtualWorld
          }
       }
    }
+
 
    public static void main(String [] args)
    {

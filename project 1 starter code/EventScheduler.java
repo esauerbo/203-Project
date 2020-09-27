@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /*
 EventScheduler: ideally our way of controlling what happens in our virtual world
@@ -19,4 +16,30 @@ final class EventScheduler
       this.pendingEvents = new HashMap<>();
       this.timeScale = timeScale;
    }
+
+
+ /* public static void executeOctoFullActivity(Entity entity, WorldModel world,
+                                              ImageStore imageStore, EventScheduler scheduler)
+   {
+      Optional<Entity> fullTarget = findNearest(world, entity.position,
+              EntityKind.ATLANTIS);
+
+      if (fullTarget.isPresent() &&
+              moveToFull(entity, world, fullTarget.get(), scheduler))
+      {
+         //at atlantis trigger animation
+         scheduleActions(fullTarget.get(), scheduler, world, imageStore);
+
+         //transform to unfull
+         transformFull(entity, world, scheduler, imageStore);
+      }
+      else
+      {
+         scheduleEvent(scheduler, entity,
+                 createActivityAction(entity, world, imageStore),
+                 entity.actionPeriod);
+      }
+   }
+   */
+
 }

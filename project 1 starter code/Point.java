@@ -28,4 +28,5 @@ final class Point
       result = result * 31 + y;
       return result;
    }
+
 }

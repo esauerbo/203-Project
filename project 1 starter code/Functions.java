@@ -120,10 +120,10 @@ final class Functions
       }
    }*/
 
-   public static void nextImage(Entity entity)
+  /* public static void nextImage(Entity entity)
    {
       entity.imageIndex = (entity.imageIndex + 1) % entity.images.size();
-   }
+   }*/
 
    public static void executeAction(Action action, EventScheduler scheduler)
    {
@@ -142,7 +142,7 @@ final class Functions
    public static void executeAnimationAction(Action action,
       EventScheduler scheduler)
    {
-      nextImage(action.entity);
+      action.entity.nextImage();
 
       if (action.repeatCount != 1)
       {
@@ -554,7 +554,7 @@ final class Functions
          for (int dx = -FISH_REACH; dx <= FISH_REACH; dx++)
          {
             Point newPt = new Point(pos.x + dx, pos.y + dy);
-            if (withinBounds(world, newPt) &&
+            if (world.withinBounds(newPt) &&
                !isOccupied(world, newPt))
             {
                return Optional.of(newPt);
@@ -699,17 +699,17 @@ final class Functions
       img.updatePixels();
    }
 
-   public static void shift(Viewport viewport, int col, int row)
+ /*  public static void shift(Viewport viewport, int col, int row)
    {
       viewport.col = col;
       viewport.row = row;
-   }
+   }*/
 
-   public static boolean contains(Viewport viewport, Point p)
+ /*  public static boolean contains(Viewport viewport, Point p)
    {
       return p.y >= viewport.row && p.y < viewport.row + viewport.numRows &&
          p.x >= viewport.col && p.x < viewport.col + viewport.numCols;
-   }
+   }*/
 
    public static void load(Scanner in, WorldModel world, ImageStore imageStore)
    {
@@ -772,7 +772,7 @@ final class Functions
          Point pt = new Point(Integer.parseInt(properties[BGND_COL]),
             Integer.parseInt(properties[BGND_ROW]));
          String id = properties[BGND_ID];
-         setBackground(world, pt,
+         world.setBackground(pt,
             new Background(id, getImageList(imageStore, id)));
       }
 
@@ -874,15 +874,15 @@ final class Functions
       addEntity(world, entity);
    }
 
-   public static boolean withinBounds(WorldModel world, Point pos)
+ /*  public static boolean withinBounds(WorldModel world, Point pos)
    {
       return pos.y >= 0 && pos.y < world.numRows &&
          pos.x >= 0 && pos.x < world.numCols;
-   }
+   }*/
 
    public static boolean isOccupied(WorldModel world, Point pos)
    {
-      return withinBounds(world, pos) &&
+      return world.withinBounds(pos) &&
          getOccupancyCell(world, pos) != null;
    }
 
@@ -942,7 +942,7 @@ final class Functions
    */
    public static void addEntity(WorldModel world, Entity entity)
    {
-      if (withinBounds(world, entity.position))
+      if (world.withinBounds(entity.position))
       {
          setOccupancyCell(world, entity.position, entity);
          world.entities.add(entity);
@@ -952,7 +952,7 @@ final class Functions
    public static void moveEntity(WorldModel world, Entity entity, Point pos)
    {
       Point oldPos = entity.position;
-      if (withinBounds(world, pos) && !pos.equals(oldPos))
+      if (world.withinBounds(pos) && !pos.equals(oldPos))
       {
          setOccupancyCell(world, oldPos, null);
          removeEntityAt(world, pos);
@@ -968,7 +968,7 @@ final class Functions
 
    public static void removeEntityAt(WorldModel world, Point pos)
    {
-      if (withinBounds(world, pos)
+      if (world.withinBounds(pos)
          && getOccupancyCell(world, pos) != null)
       {
          Entity entity = getOccupancyCell(world, pos);
@@ -981,7 +981,7 @@ final class Functions
       }
    }
 
-   public static Optional<PImage> getBackgroundImage(WorldModel world,
+ /*  public static Optional<PImage> getBackgroundImage(WorldModel world,
       Point pos)
    {
       if (withinBounds(world, pos))
@@ -992,16 +992,16 @@ final class Functions
       {
          return Optional.empty();
       }
-   }
+   }*/
 
-   public static void setBackground(WorldModel world, Point pos,
+  /* public static void setBackground(WorldModel world, Point pos,
       Background background)
    {
       if (withinBounds(world, pos))
       {
          setBackgroundCell(world, pos, background);
       }
-   }
+   }*/
 
    public static Optional<Entity> getOccupant(WorldModel world, Point pos)
    {
@@ -1026,7 +1026,7 @@ final class Functions
       world.occupancy[pos.y][pos.x] = entity;
    }
 
-   public static Background getBackgroundCell(WorldModel world, Point pos)
+  /* public static Background getBackgroundCell(WorldModel world, Point pos)
    {
       return world.background[pos.y][pos.x];
    }
@@ -1035,9 +1035,9 @@ final class Functions
       Background background)
    {
       world.background[pos.y][pos.x] = background;
-   }
+   }*/
 
-   public static Point viewportToWorld(Viewport viewport, int col, int row)
+  /* public static Point viewportToWorld(Viewport viewport, int col, int row)
    {
       return new Point(col + viewport.col, row + viewport.row);
    }
@@ -1045,14 +1045,14 @@ final class Functions
    public static Point worldToViewport(Viewport viewport, int col, int row)
    {
       return new Point(col - viewport.col, row - viewport.row);
-   }
+   }*/
 
-   public static int clamp(int value, int low, int high)
+ /*  public static int clamp(int value, int low, int high)
    {
       return Math.min(high, Math.max(value, low));
-   }
+   }*/
 
-   public static void shiftView(WorldView view, int colDelta, int rowDelta)
+ /*  public static void shiftView(WorldView view, int colDelta, int rowDelta)
    {
       int newCol = clamp(view.viewport.col + colDelta, 0,
          view.world.numCols - view.viewport.numCols);
@@ -1060,9 +1060,9 @@ final class Functions
          view.world.numRows - view.viewport.numRows);
 
       shift(view.viewport, newCol, newRow);
-   }
+   }*/
 
-   public static void drawBackground(WorldView view)
+ /*  public static void drawBackground(WorldView view)
    {
       for (int row = 0; row < view.viewport.numRows; row++)
       {
@@ -1078,9 +1078,9 @@ final class Functions
             }
          }
       }
-   }
+   }*/
 
-   public static void drawEntities(WorldView view)
+  /* public static void drawEntities(WorldView view)
    {
       for (Entity entity : view.world.entities)
       {
@@ -1093,13 +1093,13 @@ final class Functions
                viewPoint.x * view.tileWidth, viewPoint.y * view.tileHeight);
          }
       }
-   }
+   }*/
 
-   public static void drawViewport(WorldView view)
+  /* public static void drawViewport(WorldView view)
    {
       drawBackground(view);
       drawEntities(view);
-   }
+   }*/
 
    public static Action createAnimationAction(Entity entity, int repeatCount)
    {
