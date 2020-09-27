@@ -38,3 +38,7 @@ contains() : this was moved to Viewport because it is called on a Viewport objec
 executeAction(), executeAnimationAction(), executeActivityAction(),
 
 
+--Point--
+adjacent() : this function compares two points so was moved to the points class
+
+

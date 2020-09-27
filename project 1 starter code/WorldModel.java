@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.Optional;
 import processing.core.PImage;
 
+
 /*
 WorldModel ideally keeps track of the actual size of our grid world and what is in that world
 in terms of entities and background elements
@@ -11,6 +12,8 @@ in terms of entities and background elements
 
 final class WorldModel
 {
+   public static final int FISH_REACH = 1;
+
    public int numRows;
    public int numCols;
    public Background background[][];
@@ -66,4 +69,34 @@ final class WorldModel
          return Optional.empty();
       }
    }
+
+   public Optional<Point> findOpenAround(Point pos)
+   {
+      for (int dy = -FISH_REACH; dy <= FISH_REACH; dy++)
+      {
+         for (int dx = -FISH_REACH; dx <= FISH_REACH; dx++)
+         {
+            Point newPt = new Point(pos.x + dx, pos.y + dy);
+            if (this.withinBounds(newPt) &&
+                    !this.isOccupied(newPt))
+            {
+               return Optional.of(newPt);
+            }
+         }
+      }
+
+      return Optional.empty();
+   }
+
+   public boolean isOccupied(Point pos)
+   {
+      return this.withinBounds(pos) &&
+              this.getOccupancyCell(pos) != null;
+   }
+
+   public Entity getOccupancyCell(Point pos)
+   {
+      return this.occupancy[pos.y][pos.x];
+   }
+
 }

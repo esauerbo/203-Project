@@ -68,7 +68,7 @@ final class Functions
    public static final String FISH_ID_PREFIX = "fish -- ";
    public static final int FISH_CORRUPT_MIN = 20000;
    public static final int FISH_CORRUPT_MAX = 30000;
-   public static final int FISH_REACH = 1;
+   //public static final int FISH_REACH = 1;
 
    public static final String BGND_KEY = "background";
    public static final int BGND_NUM_PROPERTIES = 4;
@@ -301,7 +301,7 @@ final class Functions
    public static void executeSgrassActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
-      Optional<Point> openPt = findOpenAround(world, entity.position);
+      Optional<Point> openPt = world.findOpenAround(entity.position);
 
       if (openPt.isPresent())
       {
@@ -415,7 +415,7 @@ final class Functions
    public static boolean moveToNotFull(Entity octo, WorldModel world,
       Entity target, EventScheduler scheduler)
    {
-      if (adjacent(octo.position, target.position))
+      if (octo.position.adjacent(target.position))
       {
          octo.resourceCount += 1;
          removeEntity(world, target);
@@ -444,7 +444,7 @@ final class Functions
    public static boolean moveToFull(Entity octo, WorldModel world,
       Entity target, EventScheduler scheduler)
    {
-      if (adjacent(octo.position, target.position))
+      if (octo.position.adjacent(target.position))
       {
          return true;
       }
@@ -469,7 +469,7 @@ final class Functions
    public static boolean moveToCrab(Entity crab, WorldModel world,
       Entity target, EventScheduler scheduler)
    {
-      if (adjacent(crab.position, target.position))
+      if (crab.position.adjacent(target.position))
       {
          removeEntity(world, target);
          unscheduleAllEvents(scheduler, target);
@@ -500,13 +500,13 @@ final class Functions
       Point newPos = new Point(entity.position.x + horiz,
          entity.position.y);
 
-      if (horiz == 0 || isOccupied(world, newPos))
+      if (horiz == 0 || world.isOccupied(newPos))
       {
          int vert = Integer.signum(destPos.y - entity.position.y);
          newPos = new Point(entity.position.x,
             entity.position.y + vert);
 
-         if (vert == 0 || isOccupied(world, newPos))
+         if (vert == 0 || world.isOccupied(newPos))
          {
             newPos = entity.position;
          }
@@ -541,13 +541,13 @@ final class Functions
       return newPos;
    }
 
-   public static boolean adjacent(Point p1, Point p2)
+ /*  public static boolean adjacent(Point p1, Point p2)
    {
       return (p1.x == p2.x && Math.abs(p1.y - p2.y) == 1) ||
          (p1.y == p2.y && Math.abs(p1.x - p2.x) == 1);
-   }
+   }*/
 
-   public static Optional<Point> findOpenAround(WorldModel world, Point pos)
+  /* public static Optional<Point> findOpenAround(WorldModel world, Point pos)
    {
       for (int dy = -FISH_REACH; dy <= FISH_REACH; dy++)
       {
@@ -563,7 +563,7 @@ final class Functions
       }
 
       return Optional.empty();
-   }
+   }*/
 
    public static void scheduleEvent(EventScheduler scheduler,
       Entity entity, Action action, long afterPeriod)
@@ -864,7 +864,7 @@ final class Functions
 
    public static void tryAddEntity(WorldModel world, Entity entity)
    {
-      if (isOccupied(world, entity.position))
+      if (world.isOccupied(entity.position))
       {
          // arguably the wrong type of exception, but we are not
          // defining our own exceptions yet
@@ -880,12 +880,12 @@ final class Functions
          pos.x >= 0 && pos.x < world.numCols;
    }*/
 
-   public static boolean isOccupied(WorldModel world, Point pos)
+  /* public static boolean isOccupied(WorldModel world, Point pos)
    {
       return world.withinBounds(pos) &&
          getOccupancyCell(world, pos) != null;
    }
-
+*/
    public static Optional<Entity> nearestEntity(List<Entity> entities,
       Point pos)
    {
@@ -969,9 +969,9 @@ final class Functions
    public static void removeEntityAt(WorldModel world, Point pos)
    {
       if (world.withinBounds(pos)
-         && getOccupancyCell(world, pos) != null)
+         && world.getOccupancyCell(pos) != null)
       {
-         Entity entity = getOccupancyCell(world, pos);
+         Entity entity = world.getOccupancyCell(pos);
 
          /* this moves the entity just outside of the grid for
             debugging purposes */
@@ -1005,9 +1005,9 @@ final class Functions
 
    public static Optional<Entity> getOccupant(WorldModel world, Point pos)
    {
-      if (isOccupied(world, pos))
+      if (world.isOccupied(pos))
       {
-         return Optional.of(getOccupancyCell(world, pos));
+         return Optional.of(world.getOccupancyCell(pos));
       }
       else
       {
@@ -1015,11 +1015,11 @@ final class Functions
       }
    }
 
-   public static Entity getOccupancyCell(WorldModel world, Point pos)
+ /*  public static Entity getOccupancyCell(WorldModel world, Point pos)
    {
       return world.occupancy[pos.y][pos.x];
    }
-
+*/
    public static void setOccupancyCell(WorldModel world, Point pos,
       Entity entity)
    {
