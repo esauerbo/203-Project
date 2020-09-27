@@ -1,0 +1,2 @@
+--Entity--
+getAnimationPeriod() : this was moved to Entity because the only parameter in the function is an Entity object

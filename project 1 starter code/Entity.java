@@ -32,4 +32,21 @@ final class Entity
       this.actionPeriod = actionPeriod;
       this.animationPeriod = animationPeriod;
    }
+
+   public int getAnimationPeriod()
+   {
+      switch (this.kind)
+      {
+         case OCTO_FULL:
+         case OCTO_NOT_FULL:
+         case CRAB:
+         case QUAKE:
+         case ATLANTIS:
+            return this.animationPeriod;
+         default:
+            throw new UnsupportedOperationException(
+                    String.format("getAnimationPeriod not supported for %s",
+                            this.kind));
+      }
+   }
 }

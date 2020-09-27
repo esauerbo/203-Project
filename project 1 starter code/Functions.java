@@ -103,7 +103,7 @@ final class Functions
       }
    }
 
-   public static int getAnimationPeriod(Entity entity)
+   /*public static int getAnimationPeriod(Entity entity)
    {
       switch (entity.kind)
       {
@@ -118,7 +118,7 @@ final class Functions
             String.format("getAnimationPeriod not supported for %s",
             entity.kind));
       }
-   }
+   }*/
 
    public static void nextImage(Entity entity)
    {
@@ -149,7 +149,7 @@ final class Functions
          scheduleEvent(scheduler, action.entity,
             createAnimationAction(action.entity,
                Math.max(action.repeatCount - 1, 0)),
-            getAnimationPeriod(action.entity));
+                 action.entity.getAnimationPeriod());
       }
    }
 
@@ -328,7 +328,7 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
          scheduleEvent(scheduler, entity, createAnimationAction(entity, 0),
-            getAnimationPeriod(entity));
+                 entity.getAnimationPeriod());
          break;
 
       case OCTO_NOT_FULL:
@@ -336,7 +336,7 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
          scheduleEvent(scheduler, entity,
-            createAnimationAction(entity, 0), getAnimationPeriod(entity));
+            createAnimationAction(entity, 0), entity.getAnimationPeriod());
          break;
 
       case FISH:
@@ -350,7 +350,7 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
          scheduleEvent(scheduler, entity,
-            createAnimationAction(entity, 0), getAnimationPeriod(entity));
+            createAnimationAction(entity, 0), entity.getAnimationPeriod());
          break;
 
       case QUAKE:
@@ -359,7 +359,7 @@ final class Functions
             entity.actionPeriod);
          scheduleEvent(scheduler, entity,
             createAnimationAction(entity, QUAKE_ANIMATION_REPEAT_COUNT),
-            getAnimationPeriod(entity));
+                 entity.getAnimationPeriod());
          break;
 
       case SGRASS:
@@ -370,7 +370,7 @@ final class Functions
       case ATLANTIS:
          scheduleEvent(scheduler, entity,
                     createAnimationAction(entity, ATLANTIS_ANIMATION_REPEAT_COUNT),
-                    getAnimationPeriod(entity));
+                 entity.getAnimationPeriod());
             break;
 
       default:
