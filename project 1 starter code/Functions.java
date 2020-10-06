@@ -42,8 +42,8 @@ final class Functions
    public static final int ATLANTIS_ID = 1;
    public static final int ATLANTIS_COL = 2;
    public static final int ATLANTIS_ROW = 3;
-   public static final int ATLANTIS_ANIMATION_PERIOD = 70;
-   public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
+ //  public static final int ATLANTIS_ANIMATION_PERIOD = 70;
+  // public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
 
    public static final String SGRASS_KEY = "seaGrass";
    public static final int SGRASS_NUM_PROPERTIES = 5;
@@ -62,7 +62,7 @@ final class Functions
    public static final String QUAKE_ID = "quake";
    public static final int QUAKE_ACTION_PERIOD = 1100;
    public static final int QUAKE_ANIMATION_PERIOD = 100;
-   public static final int QUAKE_ANIMATION_REPEAT_COUNT = 10;
+ //  public static final int QUAKE_ANIMATION_REPEAT_COUNT = 10;
 
    
    public static final String FISH_ID_PREFIX = "fish -- ";
@@ -125,7 +125,7 @@ final class Functions
       entity.imageIndex = (entity.imageIndex + 1) % entity.images.size();
    }*/
 
-   public static void executeAction(Action action, EventScheduler scheduler)
+/*  public static void executeAction(Action action, EventScheduler scheduler)
    {
       switch (action.kind)
       {
@@ -137,9 +137,9 @@ final class Functions
          executeAnimationAction(action, scheduler);
          break;
       }
-   }
+   }*/
 
-   public static void executeAnimationAction(Action action,
+   /*public static void executeAnimationAction(Action action,
       EventScheduler scheduler)
    {
       action.entity.nextImage();
@@ -151,9 +151,9 @@ final class Functions
                Math.max(action.repeatCount - 1, 0)),
                  action.entity.getAnimationPeriod());
       }
-   }
+   }*/
 
-   public static void executeActivityAction(Action action,
+  /* public static void executeActivityAction(Action action,
       EventScheduler scheduler)
    {
       switch (action.entity.kind)
@@ -199,8 +199,8 @@ final class Functions
             action.entity.kind));
       }
    }
-
-   public static void executeOctoFullActivity(Entity entity, WorldModel world,
+*/
+/*   public static void executeOctoFullActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> fullTarget = findNearest(world, entity.position,
@@ -221,9 +221,9 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
       }
-   }
+   }*/
 
-   public static void executeOctoNotFullActivity(Entity entity,
+ /*  public static void executeOctoNotFullActivity(Entity entity,
       WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> notFullTarget = findNearest(world, entity.position,
@@ -237,9 +237,9 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
       }
-   }
+   }*/
 
-   public static void executeFishActivity(Entity entity, WorldModel world,
+ /*  public static void FishActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Point pos = entity.position;  // store current position before removing
@@ -255,9 +255,9 @@ final class Functions
 
       addEntity(world, crab);
       scheduleActions(crab, scheduler, world, imageStore);
-   }
+   }*/
 
-   public static void executeCrabActivity(Entity entity, WorldModel world,
+ /*  public static void executeCrabActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> crabTarget = findNearest(world,
@@ -375,9 +375,9 @@ final class Functions
 
       default:
       }
-   }
+   } */
 
-   public static boolean transformNotFull(Entity entity, WorldModel world,
+   /*public static boolean transformNotFull(Entity entity, WorldModel world,
       EventScheduler scheduler, ImageStore imageStore)
    {
       if (entity.resourceCount >= entity.resourceLimit)
@@ -425,11 +425,11 @@ final class Functions
       }
       else
       {
-         Point nextPos = nextPositionOcto(octo, world, target.position);
+         Point nextPos = octo.nextPositionOcto(world, target.position);
 
          if (!octo.position.equals(nextPos))
          {
-            Optional<Entity> occupant = getOccupant(world, nextPos);
+            Optional<Entity> occupant = world.getOccupant(nextPos);
             if (occupant.isPresent())
             {
                unscheduleAllEvents(scheduler, occupant.get());
@@ -450,11 +450,11 @@ final class Functions
       }
       else
       {
-         Point nextPos = nextPositionOcto(octo, world, target.position);
+         Point nextPos = octo.nextPositionOcto(world, target.position);
 
          if (!octo.position.equals(nextPos))
          {
-            Optional<Entity> occupant = getOccupant(world, nextPos);
+            Optional<Entity> occupant = world.getOccupant(nextPos);
             if (occupant.isPresent())
             {
                unscheduleAllEvents(scheduler, occupant.get());
@@ -477,11 +477,11 @@ final class Functions
       }
       else
       {
-         Point nextPos = nextPositionCrab(crab, world, target.position);
+         Point nextPos = crab.nextPositionCrab(world, target.position);
 
          if (!crab.position.equals(nextPos))
          {
-            Optional<Entity> occupant = getOccupant(world, nextPos);
+            Optional<Entity> occupant = world.getOccupant(nextPos);
             if (occupant.isPresent())
             {
                unscheduleAllEvents(scheduler, occupant.get());
@@ -491,9 +491,9 @@ final class Functions
          }
          return false;
       }
-   }
+   }*/
 
-   public static Point nextPositionOcto(Entity entity, WorldModel world,
+ /*  public static Point nextPositionOcto(Entity entity, WorldModel world,
       Point destPos)
    {
       int horiz = Integer.signum(destPos.x - entity.position.x);
@@ -513,9 +513,9 @@ final class Functions
       }
 
       return newPos;
-   }
+   }*/
 
-   public static Point nextPositionCrab(Entity entity, WorldModel world,
+ /*  public static Point nextPositionCrab(Entity entity, WorldModel world,
       Point destPos)
    {
       int horiz = Integer.signum(destPos.x - entity.position.x);
@@ -539,7 +539,7 @@ final class Functions
       }
 
       return newPos;
-   }
+   }*/
 
  /*  public static boolean adjacent(Point p1, Point p2)
    {
@@ -565,7 +565,7 @@ final class Functions
       return Optional.empty();
    }*/
 
-   public static void scheduleEvent(EventScheduler scheduler,
+ /*  public static void scheduleEvent(EventScheduler scheduler,
       Entity entity, Action action, long afterPeriod)
    {
       long time = System.currentTimeMillis() +
@@ -580,8 +580,8 @@ final class Functions
       pending.add(event);
       scheduler.pendingEvents.put(entity, pending);
    }
-
-   public static void unscheduleAllEvents(EventScheduler scheduler,
+*/
+ /*  public static void unscheduleAllEvents(EventScheduler scheduler,
       Entity entity)
    {
       List<Event> pending = scheduler.pendingEvents.remove(entity);
@@ -594,8 +594,8 @@ final class Functions
          }
       }
    }
-
-   public static void removePendingEvent(EventScheduler scheduler,
+*/
+ /*  public static void removePendingEvent(EventScheduler scheduler,
       Event event)
    {
       List<Event> pending = scheduler.pendingEvents.get(event.entity);
@@ -604,9 +604,9 @@ final class Functions
       {
          pending.remove(event);
       }
-   }
+   }*/
 
-   public static void updateOnTime(EventScheduler scheduler, long time)
+  /* public static void updateOnTime(EventScheduler scheduler, long time)
    {
       while (!scheduler.eventQueue.isEmpty() &&
          scheduler.eventQueue.peek().time < time)
@@ -617,7 +617,7 @@ final class Functions
          
          executeAction(next.action, scheduler);
       }
-   }
+   }*/
 
    public static List<PImage> getImageList(ImageStore imageStore, String key)
    {
@@ -862,7 +862,7 @@ final class Functions
       return properties.length == SGRASS_NUM_PROPERTIES;
    }
 
-   public static void tryAddEntity(WorldModel world, Entity entity)
+  /* public static void tryAddEntity(WorldModel world, Entity entity)
    {
       if (world.isOccupied(entity.position))
       {
@@ -872,7 +872,7 @@ final class Functions
       }
 
       addEntity(world, entity);
-   }
+   }*/
 
  /*  public static boolean withinBounds(WorldModel world, Point pos)
    {
@@ -886,7 +886,7 @@ final class Functions
          getOccupancyCell(world, pos) != null;
    }
 */
-   public static Optional<Entity> nearestEntity(List<Entity> entities,
+ /*  public static Optional<Entity> nearestEntity(List<Entity> entities,
       Point pos)
    {
       if (entities.isEmpty())
@@ -911,17 +911,17 @@ final class Functions
 
          return Optional.of(nearest);
       }
-   }
+   }*/
 
-   public static int distanceSquared(Point p1, Point p2)
+/*   public static int distanceSquared(Point p1, Point p2)
    {
       int deltaX = p1.x - p2.x;
       int deltaY = p1.y - p2.y;
 
       return deltaX * deltaX + deltaY * deltaY;
-   }
+   }*/
 
-   public static Optional<Entity> findNearest(WorldModel world, Point pos,
+/*   public static Optional<Entity> findNearest(WorldModel world, Point pos,
       EntityKind kind)
    {
       List<Entity> ofType = new LinkedList<>();
@@ -934,29 +934,29 @@ final class Functions
       }
 
       return nearestEntity(ofType, pos);
-   }
+   }*/
 
    /*
       Assumes that there is no entity currently occupying the
       intended destination cell.
    */
-   public static void addEntity(WorldModel world, Entity entity)
+ /*  public static void addEntity(WorldModel world, Entity entity)
    {
       if (world.withinBounds(entity.position))
       {
-         setOccupancyCell(world, entity.position, entity);
+         world.setOccupancyCell(entity.position, entity);
          world.entities.add(entity);
       }
-   }
+   }*/
 
-   public static void moveEntity(WorldModel world, Entity entity, Point pos)
+ /*  public static void moveEntity(WorldModel world, Entity entity, Point pos)
    {
       Point oldPos = entity.position;
       if (world.withinBounds(pos) && !pos.equals(oldPos))
       {
-         setOccupancyCell(world, oldPos, null);
+         world.setOccupancyCell(oldPos, null);
          removeEntityAt(world, pos);
-         setOccupancyCell(world, pos, entity);
+         world.setOccupancyCell(pos, entity);
          entity.position = pos;
       }
    }
@@ -975,11 +975,11 @@ final class Functions
 
          /* this moves the entity just outside of the grid for
             debugging purposes */
-         entity.position = new Point(-1, -1);
+  /*       entity.position = new Point(-1, -1);
          world.entities.remove(entity);
-         setOccupancyCell(world, pos, null);
+         world.setOccupancyCell(pos, null);
       }
-   }
+   }*/
 
  /*  public static Optional<PImage> getBackgroundImage(WorldModel world,
       Point pos)
@@ -1003,7 +1003,7 @@ final class Functions
       }
    }*/
 
-   public static Optional<Entity> getOccupant(WorldModel world, Point pos)
+ /*  public static Optional<Entity> getOccupant(WorldModel world, Point pos)
    {
       if (world.isOccupied(pos))
       {
@@ -1013,18 +1013,18 @@ final class Functions
       {
          return Optional.empty();
       }
-   }
+   }*/
 
  /*  public static Entity getOccupancyCell(WorldModel world, Point pos)
    {
       return world.occupancy[pos.y][pos.x];
    }
 */
-   public static void setOccupancyCell(WorldModel world, Point pos,
+  /* public static void setOccupancyCell(WorldModel world, Point pos,
       Entity entity)
    {
       world.occupancy[pos.y][pos.x] = entity;
-   }
+   }*/
 
   /* public static Background getBackgroundCell(WorldModel world, Point pos)
    {
@@ -1101,16 +1101,17 @@ final class Functions
       drawEntities(view);
    }*/
 
-   public static Action createAnimationAction(Entity entity, int repeatCount)
+ /*  public static Action createAnimationAction(Entity entity, int repeatCount)
    {
       return new Action(ActionKind.ANIMATION, entity, null, null, repeatCount);
-   }
+   }*/
 
-   public static Action createActivityAction(Entity entity, WorldModel world,
+  /* public static Action createActivityAction(Entity entity, WorldModel world,
       ImageStore imageStore)
    {
       return new Action(ActionKind.ACTIVITY, entity, world, imageStore, 0);
    }
+*/
 
    public static Entity createAtlantis(String id, Point position,
       List<PImage> images)

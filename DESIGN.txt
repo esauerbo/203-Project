@@ -1,12 +1,19 @@
 --Entity--
 getAnimationPeriod() : this was moved to Entity because the only parameter in the function is an Entity object
 nextImage() : this was moved to Entity because the only parameter in the function is an Entity object
+nextPositionOcto() : this was moved to Entity because the entity class describes the behvaior of entities, including the octopus
+nextPositionCrab(): this was moved to Entity because the entity class describes the behvaior of entities, including the crab
 
 
 --WorldModel--
 getBackgroundCell(), setBackgroundCell(), setBackground(), withinBounds(), getBackgroundImage() : these functions were all
 moved to WorldModel because WorldModel is the class in charge of keeping track of background elements. These functions only
 relied on the WorldModel and Background classes.
+setOccupancyCell()
+getOccupant()
+addEntity(), moveEntity(), removeEntity(), removeEntityAt(): while these functions involve an entities, they belongs
+in the WorldModel class because WorldModel controls which entities are in the world at any given time.
+
 
 
 --Action--

@@ -2,6 +2,8 @@
 Action: ideally what our various entities might do in our virutal world
  */
 
+import java.util.Optional;
+
 final class Action
 {
    public ActionKind kind;
@@ -19,4 +21,11 @@ final class Action
       this.imageStore = imageStore;
       this.repeatCount = repeatCount;
    }
+
+
+
+
+
+
+
 }
